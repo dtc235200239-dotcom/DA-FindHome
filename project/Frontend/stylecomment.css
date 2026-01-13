@@ -1,0 +1,25 @@
+.comment {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.box-comment, .infomation {
+    background-color: var(--box-bg);
+    color: var(--full-text);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.comment-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: var(--full-text);
+}
