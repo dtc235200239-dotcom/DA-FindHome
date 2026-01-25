@@ -1,0 +1,230 @@
+/* ================= RESET ================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* ================= TIÊU ĐỀ ================= */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+h3 {
+    margin-top: 30px;
+    color: #444;
+}
+
+/* ================= STATUS ================= */
+#status {
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* ================= BẢNG ================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: #fff;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background: #2c7be5;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #eef3ff;
+    cursor: pointer;
+}
+
+tr.selected {
+    background-color: #ffe0e0 !important;
+}
+
+/* box chung */
+.box-sua {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f9fafb;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* hien thi */
+.box-input {
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    background-color: #c5d3df;
+    padding: 10px;
+    border-radius: 10px;
+    gap: 12px;
+}
+
+.box-sua label {
+    font-weight: bold;
+    color: #333;
+}
+
+/* INPUT + SELECT */
+.box-sua input,
+.box-sua select {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.box-sua input:focus,
+.box-sua select:focus {
+    outline: none;
+    transform: transform 0.3s, background-color 0.3s;
+}
+.box-sua input:hover{
+    transform: scale(1.01);
+    border-color: #2c7be5;
+}
+
+/* ================= PASSWORD ================= */
+.password-box {
+    position: relative;
+}
+
+.password-box input {
+    padding-right: 35px;
+}
+
+#eye {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+}
+
+/* ================= CHECKBOX ================= */
+label[for="addCheckbox"] {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+label[for="addCheckbox"] input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+}
+
+/* ================= BUTTON ================= */
+.btn {
+    display: flex;
+    text-align: center;
+    /* flex-direction: column; */
+    padding: 10px;
+    gap: 10px;
+}
+
+.btn button {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 300px;
+}
+
+.box-sua button {
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    color: black;
+}
+.action-buttons {
+    grid-column: span 2;   /* ⭐ RẤT QUAN TRỌNG */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+
+/* TỪNG NÚT */
+.btn1:hover {
+    background-color: #28a745;
+}
+
+.btn2:hover {
+    background-color: #ffc107;
+}
+
+.btn3:hover {
+    background-color: #dc3545;
+}
+
+.btn4:hover {
+    background-color: #6c757d;
+}
+
+.btn5:hover {
+    background-color: #274a69;
+    color: #ddd;
+}
+
+/* DISABLED */
+button:disabled {
+    background: #d0d0d0 !important;
+    cursor: not-allowed;
+}
+
+/* ================= LINK ================= */
+a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #2c7be5;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ================= ERROR ================= */
+.error-message {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}

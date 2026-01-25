@@ -4,3 +4,5 @@ Lệnh cập nhật code
     git add .
     git commit -m "Update ..."
     git push origin main
+
+project1 là bản chưa sửa đổi

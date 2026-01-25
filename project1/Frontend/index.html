@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- đây là code sau khi update qua githup -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylecomment.css">
+    <link rel="stylesheet" href="main.css">
+    <style>
+        :root {
+            --primary-color: #7b7d7e;
+            --menu-color: rgb(240, 243, 242);
+            --full-text: black;
+            --menu-hover: #a89d9d;
+            --lightdack-color: #666;
+            --bg-color: white;
+            --box-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        body.dark {
+            --primary-color: #2c2c2c;
+            --menu-color: #2c2c2c;
+            --full-text: #ffffff;
+            --menu-hover: #4a4a4a;
+            --lightdack-color: #ccc;
+            --bg-color: #121212;
+            --box-bg: rgba(50, 50, 50, 0.9);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-image: url("/Frontend/picture/hinh-nen-bau-troi-40.jpg");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+
+            background-color: var(--bg-color);
+            color: var(--full-text);
+            transition: background-color 0.3s, color 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fullscreen">
+        <div class="menuall">
+            <div class="menu1">
+                <div class="miniboxmenu">
+                    <button class="menubtn" aria-expanded="false" aria-controls="sideMenu">☰</button>
+                </div>
+
+                <div class="boxicon">
+                    <a href="gioithieu.html">
+                        <img src="/Frontend/picture/logopanda.png" alt="Logo FindHome">
+                        <h1>FindHome</h1>
+                    </a>
+                </div>
+            </div>
+
+            <div class="menu2">
+                <div class="boxsearch">
+                    <form class="search-box" role="search">
+                        <input type="search" placeholder="Tìm kiếm..." aria-label="Ô tìm kiếm phòng trọ">
+                        <button type="submit">🔍</button>
+                    </form>
+                </div>
+
+                <div class="boxdangky">
+                    <a href="../Frontend/Register/register.html" class="btnlogin">Đăng ký</a>
+                </div>
+            </div>
+
+            <!-- các thành phần trong menu -->
+            <div>
+                <nav class="side-menu" id="sideMenu" aria-label="Menu chính">
+                    <div class="menu">
+                        <a href="#" id="btnHome">🏠 Trang chủ</a>
+                    </div>
+
+                    <div class="menu">
+                        <label class="switch">
+                            <input type="checkbox" id="toggleTheme">
+                            <span class="slider"></span>
+                        </label>
+                        <span>Sáng / Tối</span>
+                    </div>
+
+                    <div class="menu">
+                        <a href="help.html">❗ Help</a>
+                    </div>
+
+                    <div class="menu">
+                        <a href="gioithieu.html">ℹ️ Giới thiệu</a>
+                    </div>
+
+                    <div class="menu">
+                        <a href="#danhsach">🏘️ Danh sách phòng</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Nội dung hiển thị -->
+        <div id="main">
+            <div class="contentall">
+                <!-- Các ô nhỏ chứa nội dung -->
+                <div class="miniconten">
+                    <div class="box" tabindex="0">
+                        <img src="/Frontend/picture/logo-new-panda.jpg" alt="Phòng trọ trung tâm TP Thái Nguyên">
+                        <p>TP Thái Nguyên</p>
+                        <div class="box-info">
+                            📍 Trung tâm TP<br>
+                            💰 1.5 – 2.5 triệu / tháng<br>
+                            🚗 Có chỗ để xe<br>
+                            🔐 An ninh tốt
+                        </div>
+
+                        <div class="popup-info">
+                            <h4>Chi tiết phòng</h4>
+                            <ul>
+                                <li>Diện tích: 25m²</li>
+                                <li>Điện: 3.5k/số</li>
+                                <li>Nước: 80k/người</li>
+                                <li>Giờ giấc: Tự do</li>
+                                <li>Liên hệ: 09xx.xxx.xxx</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="box" tabindex="0">
+                        <img src="/Frontend/picture/logo-new-panda.jpg" alt="Chung cư tecco">
+                        <p>Đán</p>
+                        <div class="box-info">
+                            📍 Đán<br>
+                            💰 3 – 5 triệu / tháng<br>
+                            🛏️ Full nội thất<br>
+                            🚗 Có chỗ để xe<br>
+                            🔐 An ninh tốt
+                        </div>
+
+                        <div class="popup-info">
+                            <h4>Chi tiết căn hộ</h4>
+                            <ul>
+                                <li>Diện tích: 60m²</li>
+                                <li>2 Phòng ngủ</li>
+                                <li>Có ban công rộng</li>
+                                <li>Gần trường ĐH Y</li>
+                                <li>Liên hệ: 08xx.xxx.xxx</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box" tabindex="0">
+                        <img src="/Frontend/picture/logo-new-panda.jpg" alt="Chung cư tecco">
+                        <p>Đán</p>
+                        <div class="box-info">
+                            📍 Đán<br>
+                            💰 3 – 5 triệu / tháng<br>
+                            🛏️ Full nội thất<br>
+                            🚗 Có chỗ để xe<br>
+                            🔐 An ninh tốt
+                        </div>
+
+                        <div class="popup-info">
+                            <h4>Chi tiết căn hộ</h4>
+                            <ul>
+                                <li>Diện tích: 60m²</li>
+                                <li>2 Phòng ngủ</li>
+                                <li>Có ban công rộng</li>
+                                <li>Gần trường ĐH Y</li>
+                                <li>Liên hệ: 08xx.xxx.xxx</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box" tabindex="0">
+                        <img src="/Frontend/picture/logo-new-panda.jpg" alt="Chung cư tecco">
+                        <p>Đán</p>
+                        <div class="box-info">
+                            📍 Đán<br>
+                            💰 3 – 5 triệu / tháng<br>
+                            🛏️ Full nội thất<br>
+                            🚗 Có chỗ để xe<br>
+                            🔐 An ninh tốt
+                        </div>
+
+                        <div class="popup-info">
+                            <h4>Chi tiết căn hộ</h4>
+                            <ul>
+                                <li>Diện tích: 60m²</li>
+                                <li>2 Phòng ngủ</li>
+                                <li>Có ban công rộng</li>
+                                <li>Gần trường ĐH Y</li>
+                                <li>Liên hệ: 08xx.xxx.xxx</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box" tabindex="0">
+                        <img src="/Frontend/picture/logo-new-panda.jpg" alt="Chung cư tecco">
+                        <p>Đán</p>
+                        <div class="box-info">
+                            📍 Đán<br>
+                            💰 3 – 5 triệu / tháng<br>
+                            🛏️ Full nội thất<br>
+                            🚗 Có chỗ để xe<br>
+                            🔐 An ninh tốt
+                        </div>
+
+                        <div class="popup-info">
+                            <h4>Chi tiết căn hộ</h4>
+                            <ul>
+                                <li>Diện tích: 60m²</li>
+                                <li>2 Phòng ngủ</li>
+                                <li>Có ban công rộng</li>
+                                <li>Gần trường ĐH Y</li>
+                                <li>Liên hệ: 08xx.xxx.xxx</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box" tabindex="0">
+                        <img src="/Frontend/picture/logo-new-panda.jpg" alt="Chung cư tecco">
+                        <p>Đán</p>
+                        <div class="box-info">
+                            📍 Đán<br>
+                            💰 3 – 5 triệu / tháng<br>
+                            🛏️ Full nội thất<br>
+                            🚗 Có chỗ để xe<br>
+                            🔐 An ninh tốt
+                        </div>
+
+                        <div class="popup-info">
+                            <h4>Chi tiết căn hộ</h4>
+                            <ul>
+                                <li>Diện tích: 60m²</li>
+                                <li>2 Phòng ngủ</li>
+                                <li>Có ban công rộng</li>
+                                <li>Gần trường ĐH Y</li>
+                                <li>Liên hệ: 08xx.xxx.xxx</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box" tabindex="0">
+                        <img src="/Frontend/picture/logo-new-panda.jpg" alt="Chung cư tecco">
+                        <p>Đán</p>
+                        <div class="box-info">
+                            📍 Đán<br>
+                            💰 3 – 5 triệu / tháng<br>
+                            🛏️ Full nội thất<br>
+                            🚗 Có chỗ để xe<br>
+                            🔐 An ninh tốt
+                        </div>
+
+                        <div class="popup-info">
+                            <h4>Chi tiết căn hộ</h4>
+                            <ul>
+                                <li>Diện tích: 60m²</li>
+                                <li>2 Phòng ngủ</li>
+                                <li>Có ban công rộng</li>
+                                <li>Gần trường ĐH Y</li>
+                                <li>Liên hệ: 08xx.xxx.xxx</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="box" tabindex="0">
+                        <img src="/Frontend/picture/logo-new-panda.jpg" alt="Chung cư tecco">
+                        <p>Đán</p>
+                        <div class="box-info">
+                            📍 Đán<br>
+                            💰 3 – 5 triệu / tháng<br>
+                            🛏️ Full nội thất<br>
+                            🚗 Có chỗ để xe<br>
+                            🔐 An ninh tốt
+                        </div>
+
+                        <div class="popup-info">
+                            <h4>Chi tiết căn hộ</h4>
+                            <ul>
+                                <li>Diện tích: 60m²</li>
+                                <li>2 Phòng ngủ</li>
+                                <li>Có ban công rộng</li>
+                                <li>Gần trường ĐH Y</li>
+                                <li>Liên hệ: 08xx.xxx.xxx</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Ô bình luận bên phải -->
+        <div class="comment">
+            <div class="box-comment">
+                <h3>💬 Đánh giá từ Người dùng</h3>
+
+                <div class="comment-item">
+                    <span class="comment-author">Nguyễn Văn A</span>
+                    <p class="comment-text">Trang web dễ sử dụng, tìm phòng trọ ở Thái Nguyên rất nhanh và nhiều
+                        lựa chọn. Tuyệt vời!</p>
+                </div>
+
+                <div class="comment-item">
+                    <span class="comment-author">Trần Thị B</span>
+                    <p class="comment-text">Tôi đã tìm được căn hộ mini ở Hà Nội với giá phải chăng. Thông tin
+                        minh bạch, rất hài lòng.</p>
+                </div>
+
+                <div class="comment-item">
+                    <span class="comment-author">Lê Hoàng C</span>
+                    <p class="comment-text">Nên thêm tính năng lọc theo tiện ích (máy lạnh, máy giặt) sẽ tiện
+                        hơn!</p>
+                </div>
+
+                <div class="comment-item">
+                    <span class="comment-author">Phạm Dũng</span>
+                    <p class="comment-text">Gần khu công nghiệp Bình Dương có nhiều phòng trọ mới, giá ổn. Cảm
+                        ơn FindHome.</p>
+                </div>
+            </div>
+            <!-- Ô bên dưới hiển thị thêm thông tin -->
+            <div class="infomation">
+                <h3>
+                    <ol>
+                        <li>Nhu cầu tìm nhà trọ, căn hộ ngày càng tăng.</li>
+                        <li>Người thuê khó tìm phòng phù hợp, chủ trọ khó tiếp cận khách.</li>
+                        <li>Nhiều rủi ro lừa đảo, thiếu thông tin.</li>
+                        <li>FindHome giúp kết nối minh bạch và nhanh chóng.</li>
+                        <li>Giúp người thuê lựa chọn chính xác nhất.</li>
+                    </ol>
+                </h3>
+            </div>
+        </div>
+        <script src="main.js"></script>
+</body>
+
+</html>

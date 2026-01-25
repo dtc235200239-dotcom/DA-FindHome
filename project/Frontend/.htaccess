@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Nếu file hoặc thư mục tồn tại → không rewrite
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# URL sạch → file .html
+RewriteRule ^([^/.]+)$ $1.html [L]
