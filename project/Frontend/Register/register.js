@@ -14,7 +14,7 @@ function register() {
         return;
     }
 
-    fetch("../../Backend/register.php", {
+    fetch("https://hoanghai69.id.vn/project/Backend/register.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
