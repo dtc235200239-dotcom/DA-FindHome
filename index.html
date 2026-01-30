@@ -1,13 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+
+    <link rel="stylesheet" href="style-login.css">
+    <link rel="preload" as="style"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      onload="this.rel='stylesheet'">
+    <link rel="icon" href="../logopanda.png" type="image/png">
 </head>
+
 <body>
-    <h1>Đây là hosting hiển thị trang web FinHome của Nhóm 5!</h1>
-    <h2>Mọi người có thời gian thì vào tham khảo nhé!</h2>
-    <p>Thank you!</p>
+    <div class="login-box">
+        <h2>Đăng Nhập</h2>
+
+        <div class="input-box">
+            <input type="text" id="email-username" name="username" placeholder=" " required>
+            <label>Email hoặc tên đăng nhập</label>
+        </div>
+
+        <div class="password-box">
+            <input type="password" id="password" name="password" placeholder=" " required>
+            <label>Mật khẩu</label>
+            <i class="fa-solid fa-eye toggle" id="eye" onclick="togglePassword()"></i>
+        </div>
+
+        <button type="button" onclick="send()" class="btn-login">Login</button>
+
+        <div class="extra">
+            <a href="../Forgot/forgot.html">Quên mật khẩu</a>
+            <a href="../Register/register.html">Đăng ký</a>
+        </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="loginscr.js"></script>
 </body>
+
 </html>
