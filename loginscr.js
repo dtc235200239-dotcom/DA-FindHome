@@ -16,7 +16,7 @@ function togglePassword() {
 
 // kiểm tra mk 
 function send() {
-    fetch("https://hoaghai69.id.vn/project/Backend/logindb.php", {
+    fetch("https://hoanghai69.id.vn/project/Backend/logindb.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
