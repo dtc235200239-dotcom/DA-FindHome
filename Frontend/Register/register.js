@@ -3,7 +3,7 @@ function register() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const confirm = document.getElementById("confirm").value;
-    
+
     if (username === "" || email === "" || password === "") {
         alert("Vui lòng nhập đầy đủ thông tin");
         return;
@@ -25,16 +25,16 @@ function register() {
             password
         })
     })
-    .then(res => res.json())
-    .then(data => {
-        alert(data.message);
-        if (data.success) {
-            window.location.href = "/DA-FindHome/Frontend/Login/login.html";
-        }
-    })
-    .catch(() => {
-        alert("Server không phản hồi");
-    });
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+            if (data.success) {
+                window.location.href = "/DA-FindHome/Frontend/Login/login.html";
+            }
+        })
+        .catch(() => {
+            alert("Server không phản hồi");
+        });
 }
 
 // nút hiển thị mật khẩu 
