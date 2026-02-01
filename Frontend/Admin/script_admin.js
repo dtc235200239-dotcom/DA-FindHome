@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         tbody.innerHTML = "";
         status.textContent = "Đang tải dữ liệu...";
         try {
-            const res = await ffetch("https://hoanghai69.id.vn/project/Backend/get_users.php", {
+            const res = await fetch("https://hoanghai69.id.vn/project/Backend/get_users.php", {
                 method: "GET",
                 credentials: "include"
             });
