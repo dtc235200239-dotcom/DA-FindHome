@@ -6,7 +6,7 @@ fetch("https://hoanghai69.id.vn/project/Backend/logout.php", {
 .then(data => {
     alert(data.message);
     if (data.success) {
-        window.location.href = "/DA-FindHome/Frontend/Login/login.html";
+        window.location.href = "/DA-FindHome/index.html";
     }
 })
 .catch(err => {
