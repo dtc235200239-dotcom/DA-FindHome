@@ -9,7 +9,7 @@ document.getElementById("btnLogout").addEventListener("click", () => {
     .then(data => {
         if (data.success) {
             alert("Đăng xuất thành công");
-            window.location.href = "/project/Frontend/index.html";
+            window.location.href = "/DA-FindHome/index.html";
         } else {
             alert("Logout thất bại");
         }
