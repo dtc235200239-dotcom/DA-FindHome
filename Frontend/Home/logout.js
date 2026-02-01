@@ -1,21 +1,16 @@
-document.getElementById("btnLogout").addEventListener("click", () => {
-    if (!confirm("Bạn có chắc chắn muốn đăng xuất?")) return;
-
-    fetch("https://hoanghai69.id.vn/project/Backend/logout.php", {
-        method: "POST",
-        credentials: "include" // QUAN TRỌNG để gửi session
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) {
-            alert("Đăng xuất thành công");
-            window.location.href = "/DA-FindHome/index.html";
-        } else {
-            alert("Logout thất bại");
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        alert("Lỗi kết nối server");
-    });
+fetch("https://hoanghai69.id.vn/project/Backend/logout.php", {
+    method: "POST",
+    credentials: "include"
+})
+.then(res => res.json())
+.then(data => {
+    alert(data.message);
+    if (data.success) {
+        window.location.href = "/DA-FindHome/Frontend/Login/login.html";
+    }
+})
+.catch(err => {
+    console.error(err);
+    alert("Logout thất bại");
+    
 });
