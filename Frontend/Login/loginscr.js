@@ -33,9 +33,9 @@ function send() {
 
                 setTimeout(() => {
                     if (data.role === "user") {
-                        window.location.href = "../DA-FindHome/project/Frontend/Home/home.php";
+                        window.location.href = "../DA-FindHome/Frontend/Home/home.html";
                     } else {
-                        window.location.href = "../DA-FindHome/project/Frontend/Admin/admin.php";
+                        window.location.href = "../DA-FindHome/Frontend/Admin/admin.html";
                     }
                 }, 1000);
 
