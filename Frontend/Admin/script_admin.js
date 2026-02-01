@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         tbody.innerHTML = "";
         status.textContent = "Đang tải dữ liệu...";
         try {
-            const res = await fetch("/project/Backend/get_users.php");
+            const res = await fetch("https://hoanghai69.id.vn/project/Backend/get_users.php");
             const data = await res.json();
 
             if (!data.success) {
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        fetch("/project/Backend/update_user.php", {
+        fetch("https://hoanghai69.id.vn/project/Backend/update_user.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id, username, email, role })
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!confirm("Bạn có chắc chắn muốn xóa user ID = " + selectedUserId + " ?")) return;
 
-        fetch("/project/Backend/delete_user.php", {
+        fetch("https://hoanghai69.id.vn/project/Backend/delete_user.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id: selectedUserId })

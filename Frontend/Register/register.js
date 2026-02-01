@@ -14,7 +14,7 @@ function register() {
         return;
     }
 
-    fetch("../../Backend/register.php", {
+    fetch("https://hoanghai69.id.vn/project/Backend/register.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -29,7 +29,7 @@ function register() {
     .then(data => {
         alert(data.message);
         if (data.success) {
-            window.location.href = "../Login/login.html";
+            window.location.href = "/DA-FindHome/Frontend/Login/login.html";
         }
     })
     .catch(() => {
