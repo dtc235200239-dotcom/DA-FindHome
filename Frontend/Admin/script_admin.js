@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     // ===== ELEMENTS =====
-    const status       = document.getElementById("status");
-    const tbody        = document.getElementById("user-table-body");
-    const addCheckbox  = document.getElementById("addCheckbox");
-    const password     = document.getElementById("password");
-    const eye          = document.getElementById("eye");
-    const deleteBtn    = document.getElementById("deleteBtn");
-    const userIdInput  = document.getElementById("userId");
-    const usernameInput= document.getElementById("username");
-    const emailInput   = document.getElementById("email");
-    const roleInput    = document.getElementById("role");
+    const status = document.getElementById("status");
+    const tbody = document.getElementById("user-table-body");
+    const addCheckbox = document.getElementById("addCheckbox");
+    const password = document.getElementById("password");
+    const eye = document.getElementById("eye");
+    const deleteBtn = document.getElementById("deleteBtn");
+    const userIdInput = document.getElementById("userId");
+    const usernameInput = document.getElementById("username");
+    const emailInput = document.getElementById("email");
+    const roleInput = document.getElementById("role");
 
     let selectedUserId = null;
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!addCheckbox.checked) {
             password.disabled = true;
         } else {
-           // clearForm();
+            // clearForm();
             password.disabled = false;
         }
     });
@@ -37,7 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
         tbody.innerHTML = "";
         status.textContent = "Đang tải dữ liệu...";
         try {
-            const res = await fetch("https://hoanghai69.id.vn/project/Backend/get_users.php");
+            const res = await ffetch("https://hoanghai69.id.vn/project/Backend/get_users.php", {
+                method: "GET",
+                credentials: "include"
+            });
+
             const data = await res.json();
 
             if (!data.success) {
@@ -76,10 +80,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         selectedUserId = user.id;
 
-        userIdInput.value   = user.id;
+        userIdInput.value = user.id;
         usernameInput.value = user.username;
-        emailInput.value    = user.email;
-        roleInput.value     = user.role;
+        emailInput.value = user.email;
+        roleInput.value = user.role;
 
         addCheckbox.checked = false;
         password.value = "";
@@ -101,46 +105,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function addUser() {
-        
+
         if (!addCheckbox.checked) {
             alert("Hãy tick Thêm người dùng mới");
             return;
         }
 
         const username = usernameInput.value.trim();
-        const email    = emailInput.value.trim();
-        const pwd      = password.value.trim();
-        const role     = roleInput.value;
+        const email = emailInput.value.trim();
+        const pwd = password.value.trim();
+        const role = roleInput.value;
 
         if (!username || !email || !pwd) {
             alert("Vui lòng nhập đầy đủ thông tin");
             return;
         }
 
-        fetch("/project/Backend/add_user.php", {
+        fetch("https://hoanghai69.id.vn/project/Backend/add_user.php", {
             method: "POST",
+            credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ username, email, password: pwd, role })
         })
-        .then(res => res.json())
-        .then(data => {
-            alert(data.message);
-            if (data.success) {
-                fetchUserData();
-                clearForm();
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            alert("Lỗi kết nối server");
-        });
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                if (data.success) {
+                    fetchUserData();
+                    clearForm();
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Lỗi kết nối server");
+            });
     }
 
     function updateUser() {
         const id = userIdInput.value;
         const username = usernameInput.value.trim();
-        const email    = emailInput.value.trim();
-        const role     = roleInput.value;
+        const email = emailInput.value.trim();
+        const role = roleInput.value;
 
         if (!id) {
             alert("Vui lòng chọn user cần sửa");
@@ -149,21 +154,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         fetch("https://hoanghai69.id.vn/project/Backend/update_user.php", {
             method: "POST",
+            credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id, username, email, role })
         })
-        .then(res => res.json())
-        .then(data => {
-            alert(data.message);
-            if (data.success) {
-                fetchUserData();
-                clearForm();
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            alert("Lỗi kết nối server");
-        });
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                if (data.success) {
+                    fetchUserData();
+                    clearForm();
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Lỗi kết nối server");
+            });
     }
 
     function confirmDelete() {
@@ -176,33 +182,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
         fetch("https://hoanghai69.id.vn/project/Backend/delete_user.php", {
             method: "POST",
+            credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id: selectedUserId })
         })
-        .then(res => res.json())
-        .then(data => {
-            alert(data.message);
-            if (data.success) {
-                fetchUserData();
-                clearForm();
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            alert("Lỗi kết nối server");
-        });
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                if (data.success) {
+                    fetchUserData();
+                    clearForm();
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Lỗi kết nối server");
+            });
     }
 
     function clearForm() {
         selectedUserId = null;
-        userIdInput.value   = "";
+        userIdInput.value = "";
         usernameInput.value = "";
-        emailInput.value    = "";
-        password.value      = "";
-        roleInput.value     = "user";
-        password.disabled   = true;
+        emailInput.value = "";
+        password.value = "";
+        roleInput.value = "user";
+        password.disabled = true;
         addCheckbox.checked = false;
-        deleteBtn.disabled  = true;
+        deleteBtn.disabled = true;
         document.querySelectorAll("#user-table-body tr").forEach(tr => tr.classList.remove("selected"));
     }
 
