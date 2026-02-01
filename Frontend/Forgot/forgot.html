@@ -21,51 +21,51 @@
 
     <p>
         <button>
-            <a href="../Login/login.html">⬅️ Quay lại trang đăng nhập</a>
+            <a href="/DA-FindHome/Frontend/Login/login.html">⬅️ Quay lại trang đăng nhập</a>
         </button>
     </p>
 
     <script>
-function sendReset() {
-    const email = document.getElementById("email").value.trim();
+        function sendReset() {
+            const email = document.getElementById("email").value.trim();
 
-    if (!email) {
-        alert("Vui lòng nhập email");
-        return;
-    }
+            if (!email) {
+                alert("Vui lòng nhập email");
+                return;
+            }
 
-    fetch("/project/Backend/forgot_password.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email })
-    })
-    .then(res => res.text())
-    .then(text => {
-        let data;
-        try {
-            data = JSON.parse(text);
-        } catch {
-            console.error(text);
-            alert("Server trả về dữ liệu không hợp lệ");
-            return;
+            fetch("https://hoanghai69.id.vn/project/Backend/forgot_password.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email })
+            })
+                .then(res => res.text())
+                .then(text => {
+                    let data;
+                    try {
+                        data = JSON.parse(text);
+                    } catch {
+                        console.error(text);
+                        alert("Server trả về dữ liệu không hợp lệ");
+                        return;
+                    }
+
+                    alert(data.message);
+
+                    if (data.success && data.link) {
+                        const box = document.getElementById("reset-box");
+                        const link = document.getElementById("reset-link");
+
+                        link.href = data.link;
+                        link.textContent = "Nhấn vào đây để đặt lại mật khẩu";
+                        box.style.display = "block";
+                    }
+                })
+                .catch(() => {
+                    alert("Lỗi kết nối server");
+                });
         }
-
-        alert(data.message);
-
-        if (data.success && data.link) {
-            const box = document.getElementById("reset-box");
-            const link = document.getElementById("reset-link");
-
-            link.href = data.link;
-            link.textContent = "Nhấn vào đây để đặt lại mật khẩu";
-            box.style.display = "block";
-        }
-    })
-    .catch(() => {
-        alert("Lỗi kết nối server");
-    });
-}
-</script>
+    </script>
 
 
 </body>

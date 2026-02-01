@@ -24,7 +24,7 @@ function resetPassword() {
         return;
     }
 
-    fetch("/project/Backend/reset_password.php", {
+    fetch("https://hoanghai69.id.vn/project/Backend/reset_password.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token, password })
@@ -33,7 +33,7 @@ function resetPassword() {
     .then(data => {
         alert(data.message);
         if (data.success) {
-            window.location.href = "/project/Frontend/Login/login.html";
+            window.location.href = "/DA-FindHome/Frontend/Login/login.html";
         }
     });
 }
