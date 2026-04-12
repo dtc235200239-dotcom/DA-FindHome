@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin nhắn – NhàTốt</title>
+
+    <!-- User ID (set this dynamically from PHP session) -->
+    <!-- <meta name="user-id" content="<?php echo $_SESSION['user_id'] ?? ''; ?>"> -->
+    <meta name="user-id" content="1"> <!-- DEMO: thay bằng PHP session -->
+
+    <link rel="stylesheet" href="../assets/css/base.css">
+    <link rel="stylesheet" href="../assets/css/messages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════════════════
+     SIDEBAR – Danh sách hội thoại
+════════════════════════════════════════════════ -->
+    <aside class="msg-sidebar">
+
+        <!-- Header -->
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <i class="fa-solid fa-comments"></i>
+                <span>Tin nhắn <span class="dot"></span></span>
+            </div>
+            <!-- ✅ Thêm nút này -->
+            <button class="new-conv-btn" onclick="openNewConvModal()" title="Tin nhắn mới">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+        </div>
+
+        <!-- ✅ Thêm modal chọn người nhận -->
+        <div class="modal-overlay" id="new-conv-modal" style="display:none;" onclick="closeNewConvModal()">
+            <div class="modal-box" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <h3>Tin nhắn mới</h3>
+                    <button onclick="closeNewConvModal()"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="modal-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="user-search-input" placeholder="Tìm tên người dùng..."
+                        oninput="searchUsers(this.value)">
+                </div>
+                <div id="user-search-results" class="user-search-results">
+                    <div class="search-hint">Nhập tên để tìm kiếm</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search -->
+        <div class="sidebar-search">
+            <div class="search-input-wrap">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="conv-search" placeholder="Tìm kiếm hội thoại...">
+            </div>
+        </div>
+
+        <!-- Conversation list -->
+        <div class="conv-list" id="conv-list">
+            <div class="loading-spinner">⏳ Đang tải...</div>
+        </div>
+
+    </aside>
+
+    <!-- ═══════════════════════════════════════════════
+     MAIN – Khu vực chat
+════════════════════════════════════════════════ -->
+    <main class="chat-main">
+
+        <!-- Chưa chọn hội thoại -->
+        <div class="no-conv-selected" id="no-conv">
+            <div class="icon">💬</div>
+            <h2>Tin nhắn của bạn</h2>
+            <p>Chọn một cuộc hội thoại bên trái để bắt đầu nhắn tin</p>
+        </div>
+
+        <!-- Khu vực chat (ẩn khi chưa chọn) -->
+        <div id="chat-area" style="display:none; flex:1; flex-direction:column; overflow:hidden;">
+
+            <!-- Header chat -->
+            <div class="chat-header">
+                <div class="chat-header-left">
+                    <div class="chat-header-avatar" id="chat-header-avatar">
+                        <div class="avatar-placeholder" style="width:40px;height:40px;"></div>
+                    </div>
+                    <div>
+                        <div class="chat-header-name" id="chat-header-name">--</div>
+                        <div class="chat-header-sub" id="chat-header-sub">--</div>
+                    </div>
+                </div>
+                <div class="chat-header-right">
+                    <button class="chat-action-btn" title="Thông tin" onclick="showToast('Tính năng sắp ra mắt')">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </button>
+                    <button class="chat-action-btn" title="Xem nhà" id="btn-view-house" onclick="viewHouse()">
+                        <i class="fa-solid fa-house"></i>
+                    </button>
+                    <a href="../user/dashboard.html" class="chat-action-btn" title="Về trang chủ">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- House info bar (hiện khi có house_id) -->
+            <div class="house-info-bar" id="house-info-bar" style="display:none;">
+                <i class="fa-solid fa-house"></i>
+                <span>Hội thoại về: <strong class="house-title">--</strong></span>
+            </div>
+
+            <!-- Khu vực tin nhắn -->
+            <div class="chat-messages-wrap" id="msg-container">
+                <!-- Messages injected by JS -->
+            </div>
+
+            <!-- Typing indicator (hiện khi đối phương đang gõ) -->
+            <div class="typing-indicator" id="typing-indicator" style="display:none;">
+                <div class="typing-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span id="typing-name">đang gõ...</span>
+            </div>
+
+            <!-- Input area -->
+            <div class="chat-input-area">
+                <textarea id="msg-input" class="chat-input-box"
+                    placeholder="Nhập tin nhắn... (Enter để gửi, Shift+Enter xuống dòng)" rows="1"></textarea>
+                <button id="send-btn" class="send-btn" onclick="sendMessage()" title="Gửi (Enter)">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Toast notification -->
+    <div id="global-toast" class="toast"></div>
+
+    <script src="../assets/js/messages.js"></script>
+    <script>
+        // Xem nhà liên quan
+        function viewHouse() {
+            const houseId = typeof state !== 'undefined' && state.currentHouseId;
+            if (houseId) {
+                window.open(`/frontend/user/introduce.html?id=${houseId}`, '_blank');
+            } else {
+                showToast('Hội thoại này không liên quan đến bất động sản cụ thể');
+            }
+        }
+    </script>
+</body>
+
+</html>

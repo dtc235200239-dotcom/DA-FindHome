@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu trang</title>
+</head>
+<body>
+    <h1 style="display: flex;justify-content: center;">Trang giới thiệu đang được phát triển</h1>
+    
+    
+    (function() {
+    const widgetHTML = `
+        <div id="quick-chat" style="position:fixed; bottom:25px; right:25px; z-index:10000; font-family: sans-serif;">
+            <div id="chat-btn" style="width:60px; height:60px; background:#ee4d2d; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.3); transition: 0.3s;">
+                <i class="fa-solid fa-comments" style="font-size:26px;"></i>
+            </div>
+            <div id="chat-box" style="display:none; position:absolute; bottom:75px; right:0; width:330px; height:450px; background:white; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.2); flex-direction:column; overflow:hidden; border:1px solid #eee;">
+                <div style="background:#ee4d2d; color:white; padding:15px; font-weight:bold; display:flex; justify-content:space-between; align-items:center;">
+                    <span>Hỗ trợ MeNu</span>
+                    <span id="chat-close" style="cursor:pointer; font-size:20px;">&times;</span>
+                </div>
+                <div id="chat-box-body" style="flex:1; overflow-y:auto; padding:15px; background:#f9f9f9; font-size:14px; color:#555;">
+                    Chào bạn! Bạn cần tư vấn về ngôi nhà nào không?
+                </div>
+                <div style="padding:10px; display:flex; gap:8px; border-top:1px solid #eee;">
+                    <input type="text" id="chat-box-in" placeholder="Hỏi chúng tôi..." style="flex:1; border:1px solid #ddd; border-radius:20px; padding:8px 12px; outline:none;">
+                    <button id="chat-box-send" style="background:none; border:none; color:#ee4d2d; cursor:pointer; font-size:18px;"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', widgetHTML);
+
+    const btn = document.getElementById('chat-btn');
+    const box = document.getElementById('chat-box');
+    const close = document.getElementById('chat-close');
+
+    btn.onclick = () => {
+        box.style.display = box.style.display === 'none' ? 'flex' : 'none';
+        btn.style.transform = 'scale(0.9)';
+        setTimeout(() => btn.style.transform = 'scale(1)', 100);
+    };
+    close.onclick = () => box.style.display = 'none';
+})();
+</body>
+</html>
+</body>
+</html>

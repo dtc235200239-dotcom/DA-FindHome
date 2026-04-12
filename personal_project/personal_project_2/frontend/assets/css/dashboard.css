@@ -1,0 +1,364 @@
+/* =====================================================
+   dashboard.css
+   Đặt tại: frontend/assets/css/dashboard.css
+   ===================================================== */
+
+/* ===== NÚT ĐĂNG BÀI TRÊN HEADER ===== */
+.dashboard-btn-post {
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 4px 14px !important;
+    transition: background 0.2s;
+}
+.dashboard-btn-post:hover {
+    background: rgba(255,255,255,0.32) !important;
+    color: #fff !important;
+}
+
+/* ===== USER GREETING ===== */
+.dashboard-user-greeting {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+/* ===== USER DROPDOWN ===== */
+.header__navbar-item--has-user-menu {
+    position: relative;
+}
+
+.user-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 240px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+    border: 1px solid #eee;
+    z-index: 1200;
+    overflow: hidden;
+    animation: dropdownFade 0.18s ease;
+}
+
+@keyframes dropdownFade {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.header__navbar-item--has-user-menu:hover .user-dropdown,
+.user-dropdown--open {
+    display: block;
+}
+
+/* Mũi tên tam giác */
+.user-dropdown::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: 18px;
+    border-width: 0 8px 8px;
+    border-style: solid;
+    border-color: transparent transparent #fff;
+    filter: drop-shadow(0 -1px 1px rgba(0,0,0,0.08));
+}
+
+.user-dropdown__header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #338efe11, #2d62f511);
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.user-dropdown__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #338efe, #2d62f5);
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.user-dropdown__name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+.user-dropdown__email {
+    font-size: 1.1rem;
+    color: #888;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 155px;
+}
+
+.user-dropdown__list {
+    list-style: none;
+    padding: 6px 0;
+    margin: 0;
+}
+
+.user-dropdown__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    font-size: 1.4rem;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.user-dropdown__item:hover {
+    background: #f5f8ff;
+    color: #338efe;
+}
+
+.user-dropdown__item i {
+    width: 16px;
+    text-align: center;
+    color: #888;
+}
+
+.user-dropdown__item:hover i { color: #338efe; }
+
+.user-dropdown__item--danger { color: #e53e3e; }
+.user-dropdown__item--danger:hover { background: #fff5f5; color: #c53030; }
+.user-dropdown__item--danger i { color: #e53e3e; }
+
+.user-dropdown__badge {
+    margin-left: auto;
+    background: #338efe;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+}
+
+/* ===== BANNER CHÀO MỪNG ===== */
+.dashboard-welcome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: linear-gradient(135deg, #338efe18, #2d62f510);
+    border: 1px solid #338efe33;
+    border-radius: 10px;
+    padding: 12px 20px;
+    margin: 20px 0 0;
+    font-size: 1.4rem;
+    color: #1a1a2e;
+    animation: fadeSlideIn 0.4s ease;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.dashboard-welcome i {
+    color: #338efe;
+    margin-right: 6px;
+}
+
+.dashboard-welcome__link {
+    color: #338efe;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.dashboard-welcome__link:hover { opacity: 0.8; }
+
+.dashboard-welcome__close {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.4rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0 4px;
+    line-height: 1;
+}
+
+.dashboard-welcome__close:hover { color: #555; }
+
+/* ===== SAVED DROPDOWN (giống main.css nhưng đường dẫn ảnh fix) ===== */
+.header__saved-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 300px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    z-index: 1201;
+    border: 1px solid #eee;
+    overflow: hidden;
+}
+
+.header__saved-dropdown--open { display: block; }
+
+.header__saved-empty {
+    padding: 20px;
+    text-align: center;
+    color: #888;
+    font-size: 1.4rem;
+}
+
+.header__saved-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.15s;
+}
+
+.header__saved-item:hover { background: #f9f9f9; }
+
+.header__saved-img {
+    width: 52px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.header__saved-info { flex: 1; min-width: 0; }
+
+.header__saved-name {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1a1a2e;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header__saved-price {
+    font-size: 1.2rem;
+    color: #338efe;
+    font-weight: 500;
+}
+
+.header__saved-remove {
+    background: none;
+    border: none;
+    color: #bbb;
+    cursor: pointer;
+    font-size: 1.4rem;
+    padding: 4px;
+    border-radius: 50%;
+}
+
+.header__saved-remove:hover { color: #e0003a; background: #fee; }
+
+/* chuyển trang */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+    gap: 8px;
+}
+
+.page-btn {
+    min-width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    transition: all 0.2s;
+}
+
+.page-btn:hover:not(:disabled) {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: #f0f7ff;
+}
+
+.page-btn.active {
+    background: var(--primary-color); /* Màu xanh của bạn */
+    color: #fff;
+    border-color: var(--primary-color);
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Container chứa các nút phân trang */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+    gap: 10px;
+}
+
+/* Style chung cho các nút số trang */
+.page-btn {
+    min-width: 45px;
+    height: 45px;
+    padding: 0 5px;
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+    color: #555;
+    font-size: 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hiệu ứng khi di chuột qua nút (không áp dụng cho nút đang active hoặc bị disable) */
+.page-btn:hover:not(:disabled):not(.active) {
+    border-color: #ee4d2d;
+    color: #ee4d2d;
+    background-color: #fff5f2;
+}
+
+/* QUAN TRỌNG: Màu cho trang người dùng đang mở */
+.page-btn.active {
+    background-color: #ee4d2d; /* Màu cam đỏ nổi bật */
+    color: #fff;               /* Chữ trắng */
+    border-color: #ee4d2d;
+    box-shadow: 0 4px 10px rgba(238, 77, 45, 0.3); /* Đổ bóng nhẹ cho xịn */
+    cursor: default;           /* Đang ở trang đó rồi thì không hiện con trỏ tay nữa */
+}
+
+/* Nút bị vô hiệu hóa (ví dụ: nút "Sau" khi đang ở trang cuối) */
+.page-btn:disabled {
+    background-color: #f9f9f9;
+    color: #ccc;
+    cursor: not-allowed;
+    border-color: #eee;
+}

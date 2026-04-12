@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# 1. Ẩn đuôi .php
+# Kiểm tra xem đường dẫn người dùng nhập vào có phải là thư mục không (nếu không phải thì chạy tiếp)
+RewriteCond %{REQUEST_FILENAME} !-d
+# Kiểm tra xem đường dẫn đó khi thêm .php vào thì có tồn tại file thực tế trên máy chủ không
+RewriteCond %{REQUEST_FILENAME}\.php -f
+# Nếu có, tự động chuyển hướng ngầm (gắn thêm .php) mà không hiện trên URL
+RewriteRule ^(.*)$ $1.php [L]
+
+# 2. Ẩn đuôi .html
+# Tương tự như trên nhưng áp dụng cho file .html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]

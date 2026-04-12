@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/fonts/fontawesome-free-7.2.0-web/fontawesome-free-7.2.0-web/css/all.min.css">
+
+    <link rel="stylesheet" href="../assets/css/dashboard-admin.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="sidebar__logo">
+        <div class="sidebar__logo-text">MeNu Admin</div>
+        <div class="sidebar__logo-sub">Quản trị bất động sản</div>
+    </div>
+    <nav class="sidebar__nav">
+        <div class="sidebar__nav-label">Tổng quan</div>
+        <a href="dashboard" class="sidebar__nav-item active">
+            <i class="fa-solid fa-house-chimney"></i> Dashboard
+        </a>
+        <div class="sidebar__nav-label" style="margin-top:12px">Quản lý nhà</div>
+        <a href="#" class="sidebar__nav-item" onclick="switchTab('houses');return false;">
+            <i class="fa-solid fa-list"></i> Danh sách nhà
+        </a>
+        <a href="add-admin" class="sidebar__nav-item">
+            <i class="fa-solid fa-plus"></i> Thêm nhà mới
+        </a>
+        <div class="sidebar__nav-label" style="margin-top:12px">Hệ thống</div>
+        <a href="#" class="sidebar__nav-item" onclick="switchTab('users');return false;">
+            <i class="fa-solid fa-users"></i> Người dùng
+        </a>
+        <a href="#" class="sidebar__nav-item">
+            <i class="fa-solid fa-gear"></i> Cài đặt
+        </a>
+    </nav>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+    <div class="topbar">
+        <div>
+            <div class="topbar__title">Dashboard</div>
+            <div class="topbar__breadcrumb"><a href="dashboard">Admin</a> / Dashboard</div>
+        </div>
+        <div class="topbar__right">
+            <a href="../user/dashboard" class="topbar__back" target="_blank">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Xem trang chủ
+            </a>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- STATS -->
+        <div class="stats-grid" id="stats-grid">
+            <div class="stat-card"><div class="stat-card__icon blue"><i class="fa-solid fa-building"></i></div><div><div class="stat-card__val" id="stat-total-houses">—</div><div class="stat-card__label">Tổng số nhà</div></div></div>
+            <div class="stat-card"><div class="stat-card__icon green"><i class="fa-solid fa-circle-check"></i></div><div><div class="stat-card__val" id="stat-active-houses">—</div><div class="stat-card__label">Nhà đang hiển thị</div></div></div>
+            <div class="stat-card"><div class="stat-card__icon amber"><i class="fa-solid fa-users"></i></div><div><div class="stat-card__val" id="stat-total-users">—</div><div class="stat-card__label">Tổng người dùng</div></div></div>
+            <div class="stat-card"><div class="stat-card__icon red"><i class="fa-solid fa-lock"></i></div><div><div class="stat-card__val" id="stat-locked-users">—</div><div class="stat-card__label">Tài khoản bị khóa</div></div></div>
+        </div>
+
+        <!-- TABS -->
+        <div class="section-tabs">
+            <button class="section-tab active" onclick="switchTab('houses')"><i class="fa-solid fa-building" style="margin-right:6px"></i>Quản lý nhà</button>
+            <button class="section-tab" onclick="switchTab('users')"><i class="fa-solid fa-users" style="margin-right:6px"></i>Quản lý người dùng</button>
+        </div>
+
+        <!-- PANEL: HOUSES -->
+        <div class="section-panel active" id="panel-houses">
+            <div class="card">
+                <div class="card__header">
+                    <div class="card__header-left">
+                        <div class="card__header-icon"><i class="fa-solid fa-building"></i></div>
+                        <div class="card__title">Danh sách nhà</div>
+                    </div>
+                    <a href="add-admin" style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;background:var(--primary);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;">
+                        <i class="fa-solid fa-plus"></i> Thêm nhà
+                    </a>
+                </div>
+                <div class="card__body">
+                    <div class="table-toolbar">
+                        <div class="search-input">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="house-search" placeholder="Tìm theo tên, địa chỉ..." oninput="filterHouses()">
+                        </div>
+                        <select class="filter-select" id="house-filter-status" onchange="filterHouses()">
+                            <option value="">Tất cả trạng thái</option>
+                            <option value="active">Đang hiển thị</option>
+                            <option value="draft">Nháp</option>
+                            <option value="hidden">Ẩn</option>
+                        </select>
+                        <select class="filter-select" id="house-filter-area" onchange="filterHouses()">
+                            <option value="">Tất cả khu vực</option>
+                            <option value="Thái Nguyên">Thái Nguyên</option>
+                            <option value="Sông Công">Sông Công</option>
+                            <option value="Phổ Yên">Phổ Yên</option>
+                            <option value="Bắc Kạn">Bắc Kạn</option>
+                        </select>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <th>Tên phòng</th>
+                                    <th>Khu vực</th>
+                                    <th>Giá thuê</th>
+                                    <th>Diện tích</th>
+                                    <th>Trạng thái</th>
+                                    <th>Xác thực</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="house-tbody">
+                                <tr class="loading-row"><td colspan="8"><span class="spinner"></span>Đang tải...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination" id="house-pagination"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL: USERS -->
+        <div class="section-panel" id="panel-users">
+            <div class="card">
+                <div class="card__header">
+                    <div class="card__header-left">
+                        <div class="card__header-icon"><i class="fa-solid fa-users"></i></div>
+                        <div class="card__title">Danh sách người dùng</div>
+                    </div>
+                </div>
+                <div class="card__body">
+                    <div class="table-toolbar">
+                        <div class="search-input">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="user-search" placeholder="Tìm theo tên, email..." oninput="filterUsers()">
+                        </div>
+                        <select class="filter-select" id="user-filter-status" onchange="filterUsers()">
+                            <option value="">Tất cả</option>
+                            <option value="active">Hoạt động</option>
+                            <option value="locked">Bị khóa</option>
+                        </select>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Avatar</th>
+                                    <th>Họ tên</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="user-tbody">
+                                <tr class="loading-row"><td colspan="7"><span class="spinner"></span>Đang tải...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination" id="user-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: EDIT HOUSE -->
+<div class="modal-overlay" id="modal-edit-house">
+    <div class="modal">
+        <div class="modal__header">
+            <div class="modal__title">Chỉnh sửa thông tin nhà</div>
+            <button class="modal__close" onclick="closeModal('modal-edit-house')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal__body">
+            <input type="hidden" id="edit-house-id">
+            <div class="modal-form-row full">
+                <div class="form-group">
+                    <label class="form-label">Tên phòng / căn hộ <span style="color:var(--danger)">*</span></label>
+                    <input type="text" class="form-input" id="edit-house-name" placeholder="Tên phòng">
+                </div>
+            </div>
+            <div class="modal-form-row">
+                <div class="form-group">
+                    <label class="form-label">Loại hình</label>
+                    <select class="form-select" id="edit-house-type">
+                        <option value="phong_tro">Phòng trọ</option>
+                        <option value="chung_cu">Chung cư mini</option>
+                        <option value="can_ho">Căn hộ dịch vụ</option>
+                        <option value="nha_nguyen_can">Nhà nguyên căn</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Khu vực</label>
+                    <select class="form-select" id="edit-house-area">
+                        <option value="Thái Nguyên">Thái Nguyên</option>
+                        <option value="Sông Công">Sông Công</option>
+                        <option value="Phổ Yên">Phổ Yên</option>
+                        <option value="Bắc Kạn">Bắc Kạn</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-form-row full">
+                <div class="form-group">
+                    <label class="form-label">Địa chỉ chi tiết</label>
+                    <input type="text" class="form-input" id="edit-house-address" placeholder="Địa chỉ">
+                </div>
+            </div>
+            <div class="modal-form-row">
+                <div class="form-group">
+                    <label class="form-label">Quận / Huyện</label>
+                    <input type="text" class="form-input" id="edit-house-district">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Giá thuê (đ/tháng)</label>
+                    <input type="number" class="form-input" id="edit-house-price" min="0">
+                </div>
+            </div>
+            <div class="modal-form-row">
+                <div class="form-group">
+                    <label class="form-label">Diện tích (m²)</label>
+                    <input type="number" class="form-input" id="edit-house-area-m2" min="0">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Trạng thái</label>
+                    <select class="form-select" id="edit-house-status">
+                        <option value="active">Đang hiển thị</option>
+                        <option value="draft">Lưu nháp</option>
+                        <option value="hidden">Ẩn</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-form-row full" style="margin-bottom:0">
+                <div class="form-group">
+                    <label class="form-label">Mô tả ngắn</label>
+                    <textarea class="form-textarea" id="edit-house-desc" placeholder="Mô tả..."></textarea>
+                </div>
+            </div>
+            <div style="margin-top:14px;display:flex;align-items:center;gap:10px">
+                <input type="checkbox" id="edit-house-verified" style="width:16px;height:16px;accent-color:var(--success)">
+                <label for="edit-house-verified" style="font-size:14px;font-weight:500;cursor:pointer">✓ Đã xác thực</label>
+            </div>
+        </div>
+        <div class="modal__footer">
+            <button class="btn-cancel2" style="width:auto;padding:10px 20px;" onclick="closeModal('modal-edit-house')">Hủy</button>
+            <button class="btn-save" onclick="saveHouseEdit()"><i class="fa-solid fa-floppy-disk"></i> Lưu thay đổi</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: CONFIRM -->
+<div class="modal-overlay" id="modal-confirm">
+    <div class="confirm-modal">
+        <div class="confirm-icon" id="confirm-icon"><i class="fa-solid fa-trash" id="confirm-icon-i"></i></div>
+        <div class="confirm-title" id="confirm-title">Xác nhận xóa?</div>
+        <div class="confirm-sub" id="confirm-sub">Hành động này không thể hoàn tác.</div>
+        <div class="confirm-actions">
+            <button class="btn-cancel2" onclick="closeModal('modal-confirm')">Hủy bỏ</button>
+            <button class="btn-danger" id="confirm-btn" onclick="">Xác nhận</button>
+        </div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toast-msg">Thành công!</span>
+</div>
+
+<script src="../assets/js/dashboard-admin.js"></script>
+</body>
+</html>
